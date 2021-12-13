@@ -32,17 +32,6 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "b1442861-752b-406e-a4ff-01b5a1ded9da",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse&Keyboard",
-                    "action": "Looking",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "WASD",
                     "id": "d55f25d8-8474-480e-8072-fa19eabfb9f0",
                     "path": "2DVector",
@@ -105,6 +94,17 @@
                     "processors": "",
                     "groups": "Mouse&Keyboard",
                     "action": "Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d2fffc5b-77a5-4a2a-977d-2c4969cdc6ce",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse&Keyboard",
+                    "action": "Looking",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

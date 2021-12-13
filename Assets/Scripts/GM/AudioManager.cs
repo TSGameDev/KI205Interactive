@@ -29,4 +29,10 @@ public class AudioManager : MonoBehaviour
         source.volume = randomVolume;
         source.Play();
     }
+
+    public void PlayWithClipVariation(AudioSource source, AudioClip[] clips)
+    {
+        int clipsNum = Random.Range(0, clips.Length);
+        PlayClipWithVariation(source, clips[clipsNum]);
+    }
 }

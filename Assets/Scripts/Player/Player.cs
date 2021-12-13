@@ -6,19 +6,38 @@ using Cinemachine;
 
 public class Player : MonoBehaviour
 {
+    #region Private Variables
+
     CharacterController characterController;
     GM gameMaster;
+    AudioManager audioManager;
+    AudioSource audioSource;
+    float currentStepTime = 0;
+    float stepTime = 0.6f;
+
+    #endregion
+
+    #region Get-Setters
 
     Vector2 inputMovement;
     public Vector2 InputMovement { set { inputMovement = value;  } }
 
+    #endregion
+
+    #region Serialized/Public Variables
+
     [SerializeField] float speed = 10f;
     [SerializeField] Camera cameraa;
+    [SerializeField] AudioClip[] footsteps;
+
+    #endregion
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         gameMaster = FindObjectOfType<GM>();
+        audioSource = GetComponent<AudioSource>();
+        audioManager = FindObjectOfType<AudioManager>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -33,12 +52,21 @@ public class Player : MonoBehaviour
     {
         float x = inputMovement.x;
         float z = inputMovement.y;
-
         Vector3 movement = cameraa.transform.right * x + cameraa.transform.forward * z;
         
-        movement.y = 0;
+        if(movement.magnitude >= 0.1f)
+        {
+            movement.y = 0;
+            characterController.Move(movement * speed * Time.deltaTime);
 
-        characterController.Move(movement * speed * Time.deltaTime);
+            if (currentStepTime >= stepTime)
+            {
+                currentStepTime = 0;
+                audioManager.PlayWithClipVariation(audioSource, footsteps);
+            }
+
+            currentStepTime += 1 * Time.deltaTime;
+        }
     }
 
     public void GameStateChange()

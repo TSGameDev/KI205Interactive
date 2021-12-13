@@ -33,6 +33,14 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""8dc9fb7c-d3b0-4365-b1ab-b131d21edcd5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -101,6 +109,17 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee14f5f5-372e-407c-92b9-7c57bc242f11"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse&Keyboard"",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -134,6 +153,7 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
         m_TourActions = asset.FindActionMap("Tour Actions", throwIfNotFound: true);
         m_TourActions_Looking = m_TourActions.FindAction("Looking", throwIfNotFound: true);
         m_TourActions_Movement = m_TourActions.FindAction("Movement", throwIfNotFound: true);
+        m_TourActions_Interaction = m_TourActions.FindAction("Interaction", throwIfNotFound: true);
         // 2D Game
         m__2DGame = asset.FindActionMap("2D Game", throwIfNotFound: true);
         // UI
@@ -189,12 +209,14 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
     private ITourActionsActions m_TourActionsActionsCallbackInterface;
     private readonly InputAction m_TourActions_Looking;
     private readonly InputAction m_TourActions_Movement;
+    private readonly InputAction m_TourActions_Interaction;
     public struct TourActionsActions
     {
         private @PlayerControlers m_Wrapper;
         public TourActionsActions(@PlayerControlers wrapper) { m_Wrapper = wrapper; }
         public InputAction @Looking => m_Wrapper.m_TourActions_Looking;
         public InputAction @Movement => m_Wrapper.m_TourActions_Movement;
+        public InputAction @Interaction => m_Wrapper.m_TourActions_Interaction;
         public InputActionMap Get() { return m_Wrapper.m_TourActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -210,6 +232,9 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                 @Movement.started -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnMovement;
+                @Interaction.started -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnInteraction;
+                @Interaction.performed -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnInteraction;
+                @Interaction.canceled -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnInteraction;
             }
             m_Wrapper.m_TourActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -220,6 +245,9 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Interaction.started += instance.OnInteraction;
+                @Interaction.performed += instance.OnInteraction;
+                @Interaction.canceled += instance.OnInteraction;
             }
         }
     }
@@ -296,6 +324,7 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
     {
         void OnLooking(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
     }
     public interface I_2DGameActions
     {

@@ -41,6 +41,14 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e4ca037-a74a-4088-b6ac-66fa42f978ae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -100,12 +108,78 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""42814955-7bae-470b-9e8c-82a05a32ef14"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e00c09be-aa75-4eed-8297-02e1e0a73e76"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""e8427310-5a56-4734-877c-d18bec5209aa"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""39916344-e173-4114-b2ac-b50ba431a7d5"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""7bc3e671-8d6d-45ac-bc90-b1db4632573b"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""ee14f5f5-372e-407c-92b9-7c57bc242f11"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse&Keyboard"",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12e1d143-4fcc-4208-87ef-240d5d212e2c"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -120,20 +194,117 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                     ""action"": ""Looking"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c40d21c6-62d4-4647-9ba5-f35f3c99b91f"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Looking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e1d1b69-bb48-4664-913b-d0b00541747d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse&Keyboard"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dce32e39-c7c4-48a2-818b-3d178e604cf5"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
             ""name"": ""2D Game"",
             ""id"": ""2345cd75-f68a-4660-8c6f-6c56df78b3ca"",
-            ""actions"": [],
-            ""bindings"": []
+            ""actions"": [
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""e9cf4d37-ed6d-4196-b6c6-6876b145b59b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b09eac66-835b-4fee-90ba-6320db1d4410"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse&Keyboard"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fca04183-478f-452b-9578-bd1c67043d7d"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         },
         {
             ""name"": ""UI"",
             ""id"": ""60e1aaf5-5e62-4204-b789-b73497d85f2f"",
-            ""actions"": [],
-            ""bindings"": []
+            ""actions"": [
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""11dceacc-edac-47b2-bbff-062f55d8164a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c1f0ccd9-0484-4e18-a12e-5bc7a6fdfcf0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse&Keyboard"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62c852da-abab-4a28-a07f-5181b1733ae5"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -154,10 +325,13 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
         m_TourActions_Looking = m_TourActions.FindAction("Looking", throwIfNotFound: true);
         m_TourActions_Movement = m_TourActions.FindAction("Movement", throwIfNotFound: true);
         m_TourActions_Interaction = m_TourActions.FindAction("Interaction", throwIfNotFound: true);
+        m_TourActions_Escape = m_TourActions.FindAction("Escape", throwIfNotFound: true);
         // 2D Game
         m__2DGame = asset.FindActionMap("2D Game", throwIfNotFound: true);
+        m__2DGame_Escape = m__2DGame.FindAction("Escape", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -210,6 +384,7 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
     private readonly InputAction m_TourActions_Looking;
     private readonly InputAction m_TourActions_Movement;
     private readonly InputAction m_TourActions_Interaction;
+    private readonly InputAction m_TourActions_Escape;
     public struct TourActionsActions
     {
         private @PlayerControlers m_Wrapper;
@@ -217,6 +392,7 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
         public InputAction @Looking => m_Wrapper.m_TourActions_Looking;
         public InputAction @Movement => m_Wrapper.m_TourActions_Movement;
         public InputAction @Interaction => m_Wrapper.m_TourActions_Interaction;
+        public InputAction @Escape => m_Wrapper.m_TourActions_Escape;
         public InputActionMap Get() { return m_Wrapper.m_TourActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -235,6 +411,9 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                 @Interaction.started -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnInteraction;
                 @Interaction.performed -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnInteraction;
                 @Interaction.canceled -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnInteraction;
+                @Escape.started -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_TourActionsActionsCallbackInterface.OnEscape;
             }
             m_Wrapper.m_TourActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -248,6 +427,9 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                 @Interaction.started += instance.OnInteraction;
                 @Interaction.performed += instance.OnInteraction;
                 @Interaction.canceled += instance.OnInteraction;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
             }
         }
     }
@@ -256,10 +438,12 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
     // 2D Game
     private readonly InputActionMap m__2DGame;
     private I_2DGameActions m__2DGameActionsCallbackInterface;
+    private readonly InputAction m__2DGame_Escape;
     public struct _2DGameActions
     {
         private @PlayerControlers m_Wrapper;
         public _2DGameActions(@PlayerControlers wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Escape => m_Wrapper.m__2DGame_Escape;
         public InputActionMap Get() { return m_Wrapper.m__2DGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -269,10 +453,16 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m__2DGameActionsCallbackInterface != null)
             {
+                @Escape.started -= m_Wrapper.m__2DGameActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m__2DGameActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m__2DGameActionsCallbackInterface.OnEscape;
             }
             m_Wrapper.m__2DGameActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
             }
         }
     }
@@ -281,10 +471,12 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Escape;
     public struct UIActions
     {
         private @PlayerControlers m_Wrapper;
         public UIActions(@PlayerControlers wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Escape => m_Wrapper.m_UI_Escape;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -294,10 +486,16 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
+                @Escape.started -= m_Wrapper.m_UIActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnEscape;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
             }
         }
     }
@@ -325,11 +523,14 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
         void OnLooking(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
     public interface I_2DGameActions
     {
+        void OnEscape(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

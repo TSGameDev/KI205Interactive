@@ -7,7 +7,6 @@ public class InputMaster : MonoBehaviour
 {
     static PlayerControlers playerControls;
     Player player;
-    Vector2 movement;
 
     private void Awake()
     {
@@ -21,15 +20,16 @@ public class InputMaster : MonoBehaviour
         playerControls.TourActions.Movement.performed += ctx => player.InputMovement = ctx.ReadValue<Vector2>();
         playerControls.TourActions.Movement.canceled += ctx => player.InputMovement = ctx.ReadValue<Vector2>();
 
+        playerControls.TourActions.Escape.performed += _ => player.GameStateChange();
     }
 
     private void OnEnable()
     {
-        
+        playerControls.Enable();
     }
 
     private void OnDisable()
     {
-        
+        playerControls.Disable();
     }
 }

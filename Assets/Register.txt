@@ -1,3 +1,7 @@
-Tyler - Start: 10:15, End: 00:00
+Tyler - Start: 10:15, End: 16:10
+
+Next TODO:
+
+Add Gravitiy to Character Controller, normal unity gravity doesn't work so make a grounded check, when not grounded add a 9.81 Y decrease rate.
 
 Marty - 

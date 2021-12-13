@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  cameraa: {fileID: 0}
+  cameraa: {fileID: 2123896637}
 --- !u!114 &1620001057
 MonoBehaviour:
   m_ObjectHideFlags: 0

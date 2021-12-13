@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
         float z = inputMovement.y;
 
         Vector3 movement = cameraa.transform.right * x + cameraa.transform.forward * z;
+        
         movement.y = 0;
 
         characterController.Move(movement * speed * Time.deltaTime);

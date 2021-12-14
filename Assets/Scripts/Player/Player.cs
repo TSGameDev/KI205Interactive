@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Movement();
+        Gravity();
     }
 
     void Movement()
@@ -56,7 +57,6 @@ public class Player : MonoBehaviour
         
         if(movement.magnitude >= 0.1f)
         {
-            movement.y = 0;
             characterController.Move(movement * speed * Time.deltaTime);
 
             if (currentStepTime >= stepTime)
@@ -66,6 +66,14 @@ public class Player : MonoBehaviour
             }
 
             currentStepTime += 1 * Time.deltaTime;
+        }
+    }
+
+    void Gravity()
+    {
+        if(!characterController.isGrounded)
+        {
+            characterController.Move(Physics.gravity * Time.deltaTime);
         }
     }
 
@@ -90,4 +98,5 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
 }

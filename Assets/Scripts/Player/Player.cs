@@ -9,10 +9,15 @@ public class Player : MonoBehaviour
 {
     #region Private Variables
 
+    InputMaster inputMaster;
     CharacterController characterController;
     GM gameMaster;
     AudioManager audioManager;
     AudioSource audioSource;
+    TitleTween titleTween;
+    MainMenuTween mainMenuTween;
+    InteractionListTween interactionListTween;
+
     float currentStepTime = 0;
     float stepTime = 0.6f;
 
@@ -41,6 +46,10 @@ public class Player : MonoBehaviour
         gameMaster = FindObjectOfType<GM>();
         audioSource = GetComponent<AudioSource>();
         audioManager = FindObjectOfType<AudioManager>();
+        titleTween = FindObjectOfType<TitleTween>();
+        mainMenuTween = FindObjectOfType<MainMenuTween>();
+        interactionListTween = FindObjectOfType<InteractionListTween>();
+        inputMaster = GetComponent<InputMaster>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -85,21 +94,45 @@ public class Player : MonoBehaviour
         switch (gameMaster.gamestate)
         {
             case GameState.Tour:
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                gameMaster.gamestate = GameState.UI;
+                ChangeToUI();
                 break;
 
             case GameState.UI:
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                gameMaster.gamestate = GameState.Tour;
+                ChangeToTour();
                 break;
 
             case GameState.Game:
-                gameMaster.gamestate = GameState.Tour;
+                ExitGame();
                 break;
         }
     }
 
+    void ChangeToUI()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        gameMaster.gamestate = GameState.UI;
+        titleTween.OpenTween();
+        mainMenuTween.OpenTween();
+        interactionListTween.OpenTween();
+        inputMaster.playerControls.TourActions.Disable();
+        inputMaster.playerControls.UI.Enable();
+    }
+
+    void ChangeToTour()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        gameMaster.gamestate = GameState.Tour;
+        titleTween.CloseTween();
+        mainMenuTween.CloseTween();
+        interactionListTween.CloseTween();
+        inputMaster.playerControls.TourActions.Enable();
+        inputMaster.playerControls.UI.Disable();
+    }
+
+    void ExitGame()
+    {
+        gameMaster.gamestate = GameState.Tour;
+    }
 }

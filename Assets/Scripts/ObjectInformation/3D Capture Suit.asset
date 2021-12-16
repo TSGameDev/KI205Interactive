@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: 3D Capture Suit
   objectPicture: {fileID: 0}
-  information: This is the information to be displayed about the object the user
-    interacted with.
+  information: 'The capture suit allows the creation of dynamic animations by acting.
+
+    A
+    person wares the suit and with a correctly rigged modells, you can have them
+    copy the persons movements.'

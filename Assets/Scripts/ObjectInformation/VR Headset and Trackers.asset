@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: VR Headset and Trackers
   objectPicture: {fileID: 0}
-  information: This is the information to be displayed about the object the user
-    interacted with.
+  information: VR headset and trackers used for the development of VR games and experiences.

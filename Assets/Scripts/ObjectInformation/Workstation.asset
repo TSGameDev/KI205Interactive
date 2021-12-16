@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: Workstation
   objectPicture: {fileID: 0}
-  information: This is the information to be displayed about the object the user
-    interacted with.
+  information: A workstation equiped with top of the range specs and industry standard
+    software.

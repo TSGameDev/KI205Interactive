@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class InputMaster : MonoBehaviour
 {
-    static PlayerControlers playerControls;
+    public PlayerControlers playerControls;
     Player player;
 
     private void Awake()
@@ -23,6 +23,8 @@ public class InputMaster : MonoBehaviour
         playerControls.TourActions.Escape.performed += _ => player.GameStateChange();
 
         playerControls.TourActions.Interaction.performed += _ => player.interaction();
+
+        playerControls.UI.Escape.performed += _ => player.GameStateChange();
     }
 
     private void OnEnable()

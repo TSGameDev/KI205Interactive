@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b459c1a23fd420545b0998c30651096a, type: 3}
   m_Name: Workstation
   m_EditorClassIdentifier: 
-  titleText: New Title
+  titleText: Workstation
   objectPicture: {fileID: 0}
   information: This is the information to be displayed about the object the user
     interacted with.

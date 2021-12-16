@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 174793115402076693}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -254,6 +254,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 00e04a3ea1a3ee84b8eb2de2d66debc4, type: 3}
   - {fileID: 8300000, guid: 32db9610884b5de43912e3b6318955e4, type: 3}
   - {fileID: 8300000, guid: a38d669e745734842a686f5ecc0fba4e, type: 3}
+  virtualCamera: {fileID: 174793116257709016}
 --- !u!82 &174793115402076693
 AudioSource:
   m_ObjectHideFlags: 0
@@ -532,7 +533,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9132948, y: 1}
+    m_SensorSize: {x: 1.761017, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

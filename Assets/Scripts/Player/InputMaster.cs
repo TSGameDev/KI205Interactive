@@ -13,23 +13,22 @@ public class InputMaster : MonoBehaviour
         playerControls = new PlayerControlers();
         player = GetComponent<Player>();
 
-        playerControls.TourActions.Enable();
-        playerControls.UI.Disable();
-        playerControls._2DGame.Disable();
-
         playerControls.TourActions.Movement.performed += ctx => player.InputMovement = ctx.ReadValue<Vector2>();
         playerControls.TourActions.Movement.canceled += ctx => player.InputMovement = ctx.ReadValue<Vector2>();
 
-        playerControls.TourActions.Escape.performed += _ => player.GameStateChange();
+        playerControls.TourActions.Escape.started += _ => player.GameStateChange();
 
         playerControls.TourActions.Interaction.performed += _ => player.interaction();
 
-        playerControls.UI.Escape.performed += _ => player.GameStateChange();
+        playerControls.UI.Escape.started += _ => player.GameStateChange();
     }
 
     private void OnEnable()
     {
         playerControls.Enable();
+        playerControls.TourActions.Enable();
+        playerControls.UI.Disable();
+        playerControls._2DGame.Disable();
     }
 
     private void OnDisable()

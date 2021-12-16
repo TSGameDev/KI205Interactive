@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     [SerializeField] float speed = 10f;
     [SerializeField] Camera cameraa;
     [SerializeField] AudioClip[] footsteps;
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
 
     public UnityAction interaction;
 
@@ -94,16 +95,18 @@ public class Player : MonoBehaviour
         switch (gameMaster.gamestate)
         {
             case GameState.Tour:
+                Debug.Log("Tour Case");
                 ChangeToUI();
-                break;
+                return;
 
             case GameState.UI:
+                Debug.Log("UI Case");
                 ChangeToTour();
-                break;
+                return;
 
             case GameState.Game:
                 ExitGame();
-                break;
+                return;
         }
     }
 
@@ -111,24 +114,28 @@ public class Player : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        gameMaster.gamestate = GameState.UI;
+        virtualCamera.enabled = false;
         titleTween.OpenTween();
         mainMenuTween.OpenTween();
         interactionListTween.OpenTween();
         inputMaster.playerControls.TourActions.Disable();
         inputMaster.playerControls.UI.Enable();
+        gameMaster.gamestate = GameState.UI;
+        Debug.Log("Now In UI");
     }
 
     void ChangeToTour()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        gameMaster.gamestate = GameState.Tour;
+        virtualCamera.enabled = true;
         titleTween.CloseTween();
         mainMenuTween.CloseTween();
         interactionListTween.CloseTween();
         inputMaster.playerControls.TourActions.Enable();
         inputMaster.playerControls.UI.Disable();
+        gameMaster.gamestate = GameState.Tour;
+        Debug.Log("Now In Tour");
     }
 
     void ExitGame()

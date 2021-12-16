@@ -13,6 +13,8 @@ public class GM: MonoBehaviour
             instance = this;
         else if (instance != this)
             Destroy(this);
+
+        gamestate = GameState.Tour;
     }
 }
 

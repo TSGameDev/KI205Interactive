@@ -21,6 +21,8 @@ public class InputMaster : MonoBehaviour
         playerControls.TourActions.Movement.canceled += ctx => player.InputMovement = ctx.ReadValue<Vector2>();
 
         playerControls.TourActions.Escape.performed += _ => player.GameStateChange();
+
+        playerControls.TourActions.Interaction.performed += _ => player.interaction();
     }
 
     private void OnEnable()

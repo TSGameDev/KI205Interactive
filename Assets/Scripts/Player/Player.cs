@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class Player : MonoBehaviour
     [SerializeField] float speed = 10f;
     [SerializeField] Camera cameraa;
     [SerializeField] AudioClip[] footsteps;
+
+    public UnityAction interaction;
 
     #endregion
 

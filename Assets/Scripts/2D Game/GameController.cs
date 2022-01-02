@@ -7,6 +7,18 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] GameObject GameEnvironment;
     [SerializeField] float speed = 5f;
+    [SerializeField] float jumpForce = 5f;
+    [SerializeField] GameObject playerStartPos;
+
+    Rigidbody2D Rigidbody2D;
+    BoxCollider2D BoxCollider2D;
+    bool isAir = false;
+
+    private void Awake()
+    {
+        Rigidbody2D = GetComponent<Rigidbody2D>();
+        BoxCollider2D = GetComponent<BoxCollider2D>();
+    }
 
     float horizontalMovement;
     public float HorizontalMovement
@@ -17,20 +29,10 @@ public class GameController : MonoBehaviour
         }
     }
 
-    float verticleMovement;
-    public float VerticleMovement
-    {
-        set
-        {
-            verticleMovement = value;
-        }
-    }
 
-
-    private void Update()
+    private void FixedUpdate()
     {
         EnvironmentalMove(horizontalMovement);
-        playerFallorJump(verticleMovement);
     }
 
     public void EnvironmentalMove(float axis)
@@ -47,14 +49,35 @@ public class GameController : MonoBehaviour
 
     public void playerFallorJump(float axis)
     {
-        if (axis > Mathf.Epsilon)
+        if(!isAir)
         {
-            //jump up
-        }
-        else if(axis < -Mathf.Epsilon)
-        {
-            //fall through ground
+            if (axis > Mathf.Epsilon)
+            {
+                Rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+                isAir = true;
+            }
+            else if (axis < -Mathf.Epsilon)
+            {
+                BoxCollider2D.enabled = false;
+            }
+            else
+            {
+                BoxCollider2D.enabled = true;
+            }
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("2D Environment"))
+        {
+            isAir = false;
+        }
+
+        if(collision.gameObject.CompareTag("2D KillZone"))
+        {
+            gameObject.transform.position = playerStartPos.transform.position;
+            GameEnvironment.transform.localPosition = new Vector3(0, 0, 0);
+        }
+    }
 }

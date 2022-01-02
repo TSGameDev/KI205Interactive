@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - InteractionVolume
+  - 2D Environment
+  - 2D KillZone
   layers:
   - Default
   - TransparentFX

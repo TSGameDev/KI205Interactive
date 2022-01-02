@@ -24,8 +24,8 @@ public class InputMaster : MonoBehaviour
         playerControls._2DGame.Movement.performed += ctx => gameController.HorizontalMovement = ctx.ReadValue<Vector2>().x;
         playerControls._2DGame.Movement.canceled += ctx => gameController.HorizontalMovement = ctx.ReadValue<Vector2>().x;
 
-        playerControls._2DGame.Movement.performed += ctx => gameController.VerticleMovement = ctx.ReadValue<Vector2>().y;
-        playerControls._2DGame.Movement.canceled += ctx => gameController.VerticleMovement = ctx.ReadValue<Vector2>().y;
+        playerControls._2DGame.Movement.performed += ctx => gameController.playerFallorJump(ctx.ReadValue<Vector2>().y);
+        //playerControls._2DGame.Movement.canceled += ctx => gameController.playerFallorJump(ctx.ReadValue<Vector2>().y);
     }
 
     private void OnEnable()

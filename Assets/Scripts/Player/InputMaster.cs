@@ -7,6 +7,7 @@ public class InputMaster : MonoBehaviour
 {
     public PlayerControlers playerControls;
     Player player;
+    [SerializeField] GameController gameController;
 
     private void Awake()
     {
@@ -20,7 +21,11 @@ public class InputMaster : MonoBehaviour
 
         playerControls.TourActions.Interaction.performed += _ => player.interaction();
 
-        playerControls.UI.Escape.started += _ => player.GameStateChange();
+        playerControls._2DGame.Movement.performed += ctx => gameController.HorizontalMovement = ctx.ReadValue<Vector2>().x;
+        playerControls._2DGame.Movement.canceled += ctx => gameController.HorizontalMovement = ctx.ReadValue<Vector2>().x;
+
+        playerControls._2DGame.Movement.performed += ctx => gameController.VerticleMovement = ctx.ReadValue<Vector2>().y;
+        playerControls._2DGame.Movement.canceled += ctx => gameController.VerticleMovement = ctx.ReadValue<Vector2>().y;
     }
 
     private void OnEnable()

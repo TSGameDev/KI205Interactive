@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractionScript : MonoBehaviour
 {
     [SerializeField] InformationSO objectInformation;
+    [SerializeField] bool ChangeTo2D = false;
 
     InfoBoxTween infoBoxTween;
     InteractionBoxTween interactionBoxTween;
@@ -17,13 +18,20 @@ public class InteractionScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        Player player = other.GetComponent<Player>();
+        
+        if (other.CompareTag("Player") && !ChangeTo2D)
         {
             interactionBoxTween.OpenTween();
-            Player player = other.GetComponent<Player>();
             player.interaction = infoBoxTween.OpenTween;
 
             infoBoxTween.UpdateGUI(objectInformation.titleText, objectInformation.information, objectInformation.objectPicture);
+        }
+
+        if (ChangeTo2D)
+        {
+            interactionBoxTween.OpenTween();
+            player.interaction = player.ChangeTo2D;
         }
     }
 

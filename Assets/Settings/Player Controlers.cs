@@ -108,7 +108,7 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""Game Pad"",
                     ""id"": ""42814955-7bae-470b-9e8c-82a05a32ef14"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -241,6 +241,14 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""2947bd75-0990-4f5e-a5fb-6d74e331aeb8"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -265,6 +273,116 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                     ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""83cd9eed-e5f5-41f6-b6aa-201ba1769051"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""96c114fd-dcbc-4789-95aa-95e693f5fe48"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse&Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""40287d55-17f8-49de-bf0e-a6833d83a035"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse&Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""7918fcdb-f132-4f3c-a214-b81fabce015b"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse&Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""50d36a97-c261-4b6b-9984-e7829ade78f9"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse&Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Game Pad"",
+                    ""id"": ""7092c68a-2200-41b3-aff3-cb7e6c40b4d0"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""0586c228-8b83-4f98-84a1-a7a40ddefe5d"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""a36869bf-e87f-45c8-bc0f-880bac252392"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""b6c48158-6e21-49e9-9997-5efb16fbfb7c"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""1df7b08f-eed2-426a-b607-5d37e2ddd921"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -329,6 +447,7 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
         // 2D Game
         m__2DGame = asset.FindActionMap("2D Game", throwIfNotFound: true);
         m__2DGame_Escape = m__2DGame.FindAction("Escape", throwIfNotFound: true);
+        m__2DGame_Movement = m__2DGame.FindAction("Movement", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
@@ -439,11 +558,13 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
     private readonly InputActionMap m__2DGame;
     private I_2DGameActions m__2DGameActionsCallbackInterface;
     private readonly InputAction m__2DGame_Escape;
+    private readonly InputAction m__2DGame_Movement;
     public struct _2DGameActions
     {
         private @PlayerControlers m_Wrapper;
         public _2DGameActions(@PlayerControlers wrapper) { m_Wrapper = wrapper; }
         public InputAction @Escape => m_Wrapper.m__2DGame_Escape;
+        public InputAction @Movement => m_Wrapper.m__2DGame_Movement;
         public InputActionMap Get() { return m_Wrapper.m__2DGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -456,6 +577,9 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                 @Escape.started -= m_Wrapper.m__2DGameActionsCallbackInterface.OnEscape;
                 @Escape.performed -= m_Wrapper.m__2DGameActionsCallbackInterface.OnEscape;
                 @Escape.canceled -= m_Wrapper.m__2DGameActionsCallbackInterface.OnEscape;
+                @Movement.started -= m_Wrapper.m__2DGameActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m__2DGameActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m__2DGameActionsCallbackInterface.OnMovement;
             }
             m_Wrapper.m__2DGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -463,6 +587,9 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
                 @Escape.started += instance.OnEscape;
                 @Escape.performed += instance.OnEscape;
                 @Escape.canceled += instance.OnEscape;
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
             }
         }
     }
@@ -528,6 +655,7 @@ public class @PlayerControlers : IInputActionCollection, IDisposable
     public interface I_2DGameActions
     {
         void OnEscape(InputAction.CallbackContext context);
+        void OnMovement(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     TitleTween titleTween;
     MainMenuTween mainMenuTween;
     InteractionListTween interactionListTween;
+    InteractionBoxTween interactionBoxTween;
 
     float currentStepTime = 0;
     float stepTime = 0.6f;
@@ -36,6 +37,8 @@ public class Player : MonoBehaviour
     [SerializeField] Camera cameraa;
     [SerializeField] AudioClip[] footsteps;
     [SerializeField] CinemachineVirtualCamera virtualCamera;
+    [SerializeField] CinemachineVirtualCamera gameCamera;
+
 
     public UnityAction interaction;
 
@@ -51,6 +54,7 @@ public class Player : MonoBehaviour
         mainMenuTween = FindObjectOfType<MainMenuTween>();
         interactionListTween = FindObjectOfType<InteractionListTween>();
         inputMaster = GetComponent<InputMaster>();
+        interactionBoxTween = FindObjectOfType<InteractionBoxTween>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -141,5 +145,19 @@ public class Player : MonoBehaviour
     void ExitGame()
     {
         gameMaster.gamestate = GameState.Tour;
+        gameCamera.Priority = 0;
+        virtualCamera.Priority = 1;
+        inputMaster.playerControls.TourActions.Enable();
+        inputMaster.playerControls._2DGame.Disable();
+    }
+
+    public void ChangeTo2D()
+    {
+        gameMaster.gamestate = GameState.Game;
+        gameCamera.Priority = 1;
+        virtualCamera.Priority = 0;
+        inputMaster.playerControls.TourActions.Disable();
+        inputMaster.playerControls._2DGame.Enable();
+        interactionBoxTween.CloseTween();
     }
 }

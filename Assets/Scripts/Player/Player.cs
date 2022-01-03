@@ -94,8 +94,84 @@ public class Player : MonoBehaviour
         }
     }
 
+    void ChangeToUI()
+    {
+        //change the cursor so its visable and not locked
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        //stop the camera from moving around when using the ui
+        virtualCamera.enabled = false;
+        
+        //active the main menu tweens
+        titleTween.OpenTween();
+        mainMenuTween.OpenTween();
+        interactionListTween.OpenTween();
+
+        //disable the tour controls and active the UI controls
+        inputMaster.playerControls.TourActions.Disable();
+        inputMaster.playerControls.UI.Enable();
+        
+        //change the gamestate to UI
+        gameMaster.gamestate = GameState.UI;
+    }
+
+    void ChangeToTour()
+    {
+        //Change the cursor to be locked and invisable
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
+        //allow the camera to move
+        virtualCamera.enabled = true;
+        
+        //close the main menu through tweens
+        titleTween.CloseTween();
+        mainMenuTween.CloseTween();
+        interactionListTween.CloseTween();
+        
+        //active the tour controls and disable the UI controls
+        inputMaster.playerControls.TourActions.Enable();
+        inputMaster.playerControls.UI.Disable();
+        
+        //change the game state to the tour state
+        gameMaster.gamestate = GameState.Tour;
+    }
+
+    void ExitGame()
+    {
+        //change the gamestate to tour from the 2D game state
+        gameMaster.gamestate = GameState.Tour;
+
+        //change the camera back to the tour camera through cinemachine virtual camera priority
+        gameCamera.Priority = 0;
+        virtualCamera.Priority = 1;
+        
+        //active the tour controls and disable the 2D game controls
+        inputMaster.playerControls.TourActions.Enable();
+        inputMaster.playerControls._2DGame.Disable();
+    }
+
+    public void ChangeTo2D()
+    {
+        //change the game state to the 2D Game state
+        gameMaster.gamestate = GameState.Game;
+        
+        //change to the 2D game camera from the tour camera through cinemachine virtural camera priority
+        gameCamera.Priority = 1;
+        virtualCamera.Priority = 0;
+        
+        // disable the tour controls and active the 2D game contorls
+        inputMaster.playerControls.TourActions.Disable();
+        inputMaster.playerControls._2DGame.Enable();
+        
+        //close the interaction ui through its tween to free up screen space when playing the 2D game
+        interactionBoxTween.CloseTween();
+    }
+
     public void GameStateChange()
     {
+        //a switch which changes the game state from tour to UI, UI to tour and Game to tour. This is the main the escape button functionality.
         switch (gameMaster.gamestate)
         {
             case GameState.Tour:
@@ -114,50 +190,4 @@ public class Player : MonoBehaviour
         }
     }
 
-    void ChangeToUI()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        virtualCamera.enabled = false;
-        titleTween.OpenTween();
-        mainMenuTween.OpenTween();
-        interactionListTween.OpenTween();
-        inputMaster.playerControls.TourActions.Disable();
-        inputMaster.playerControls.UI.Enable();
-        gameMaster.gamestate = GameState.UI;
-        Debug.Log("Now In UI");
-    }
-
-    void ChangeToTour()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        virtualCamera.enabled = true;
-        titleTween.CloseTween();
-        mainMenuTween.CloseTween();
-        interactionListTween.CloseTween();
-        inputMaster.playerControls.TourActions.Enable();
-        inputMaster.playerControls.UI.Disable();
-        gameMaster.gamestate = GameState.Tour;
-        Debug.Log("Now In Tour");
-    }
-
-    void ExitGame()
-    {
-        gameMaster.gamestate = GameState.Tour;
-        gameCamera.Priority = 0;
-        virtualCamera.Priority = 1;
-        inputMaster.playerControls.TourActions.Enable();
-        inputMaster.playerControls._2DGame.Disable();
-    }
-
-    public void ChangeTo2D()
-    {
-        gameMaster.gamestate = GameState.Game;
-        gameCamera.Priority = 1;
-        virtualCamera.Priority = 0;
-        inputMaster.playerControls.TourActions.Disable();
-        inputMaster.playerControls._2DGame.Enable();
-        interactionBoxTween.CloseTween();
-    }
 }

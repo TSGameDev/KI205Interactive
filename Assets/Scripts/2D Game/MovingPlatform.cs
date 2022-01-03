@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    #region Serialized Variables
+
     [SerializeField] Transform pos1, pos2;
     [SerializeField] float speed;
     [SerializeField] Transform startPos;
 
+    #endregion
+
+    #region Private Variables
+
     Vector3 nextPos;
+
+    #endregion
 
     private void Start()
     {

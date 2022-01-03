@@ -2618,7 +2618,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.58474576, y: 1}
+    m_SensorSize: {x: 1.761017, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -6880,6 +6880,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6932794128153809862, guid: 7dbf6251c9ec33d4081b278784fc6838, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 234.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932794128153809862, guid: 7dbf6251c9ec33d4081b278784fc6838, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00035572
+      objectReference: {fileID: 0}
     - target: {fileID: 6932794128199843377, guid: 7dbf6251c9ec33d4081b278784fc6838, type: 3}
       propertyPath: m_Name
       value: UI
@@ -6971,6 +6979,18 @@ PrefabInstance:
     - target: {fileID: 6932794128199843382, guid: 7dbf6251c9ec33d4081b278784fc6838, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932794128638379887, guid: 7dbf6251c9ec33d4081b278784fc6838, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932794128638379887, guid: 7dbf6251c9ec33d4081b278784fc6838, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932794128638379887, guid: 7dbf6251c9ec33d4081b278784fc6838, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dbf6251c9ec33d4081b278784fc6838, type: 3}

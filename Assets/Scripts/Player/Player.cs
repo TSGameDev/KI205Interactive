@@ -101,6 +101,7 @@ public class Player : MonoBehaviour
         Cursor.visible = true;
 
         //stop the camera from moving around when using the ui
+        gameCamera.enabled = false;
         virtualCamera.enabled = false;
         
         //active the main menu tweens
@@ -140,13 +141,16 @@ public class Player : MonoBehaviour
 
     void ExitGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         //change the gamestate to tour from the 2D game state
         gameMaster.gamestate = GameState.Tour;
 
         //change the camera back to the tour camera through cinemachine virtual camera priority
-        gameCamera.Priority = 0;
-        virtualCamera.Priority = 1;
-        
+        gameCamera.enabled = false;
+        virtualCamera.enabled = true;
+
         //active the tour controls and disable the 2D game controls
         inputMaster.playerControls.TourActions.Enable();
         inputMaster.playerControls._2DGame.Disable();
@@ -156,10 +160,10 @@ public class Player : MonoBehaviour
     {
         //change the game state to the 2D Game state
         gameMaster.gamestate = GameState.Game;
-        
+
         //change to the 2D game camera from the tour camera through cinemachine virtural camera priority
-        gameCamera.Priority = 1;
-        virtualCamera.Priority = 0;
+        gameCamera.enabled = true;
+        virtualCamera.enabled = false;
         
         // disable the tour controls and active the 2D game contorls
         inputMaster.playerControls.TourActions.Disable();

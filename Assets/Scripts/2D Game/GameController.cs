@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -11,6 +11,9 @@ public class GameController : MonoBehaviour
     [SerializeField] float speed = 5f;
     [SerializeField] float jumpForce = 5f;
     [SerializeField] GameObject playerStartPos;
+    [SerializeField] TextMeshProUGUI scoreTxt;
+    [SerializeField] LayerMask gameEnvironmentLayer;
+    [SerializeField] GameObject[] coins;
 
     #endregion
 
@@ -18,8 +21,11 @@ public class GameController : MonoBehaviour
 
     Rigidbody2D Rigidbody2D;
     BoxCollider2D BoxCollider2D;
-    bool isAir = false;
+    int score = 0;
 
+    const float boxcastYoffset = 0.09f;
+    const float boxcastSizeX = 0.15f;
+    const float boxcastSizeY = 0.02f;
     #endregion
 
     #region Get-Setters
@@ -68,40 +74,57 @@ public class GameController : MonoBehaviour
     /// <param name="axis">The value of the vector2 that represents the WS button presses</param>
     public void playerFallorJump(float axis)
     {
-        if(!isAir)
+        if (axis > Mathf.Epsilon)
         {
-            if (axis > Mathf.Epsilon)
+            Vector2 boxOrigin = new Vector2(transform.position.x, transform.position.y - boxcastYoffset);
+            Vector2 boxSize = new Vector2(boxcastSizeX, boxcastSizeY);
+            if (Physics2D.BoxCast(boxOrigin, boxSize, 0f, Vector2.down, ~gameEnvironmentLayer))
             {
-                //makes the character jump and stops multiple jumps
                 Rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-                isAir = true;
             }
-            else if (axis < -Mathf.Epsilon)
-            {
-                //turns of the colliders to allow the player to fall through terrain
-                BoxCollider2D.enabled = false;
-            }
-            else
-            {
-                //if there is no input, makes sure the collier is active
-                BoxCollider2D.enabled = true;
-            }
+        }
+        else if (axis < -Mathf.Epsilon)
+        {
+            //turns of the colliders to allow the player to fall through terrain
+            BoxCollider2D.enabled = false;
+        }
+        else
+        {
+            //if there is no input, makes sure the collier is active
+            BoxCollider2D.enabled = true;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("2D Environment"))
-        {
-            //makes the character notice they are no longer in the air therefore allowed to jump
-            isAir = false;
-        }
-
         if(collision.gameObject.CompareTag("2D KillZone"))
         {
             //resets the character and environment position
             gameObject.transform.position = playerStartPos.transform.position;
             GameEnvironment.transform.localPosition = new Vector3(0, 0, 0);
+            
+            foreach(GameObject coin in coins)
+            {
+                coin.SetActive(true);
+            }
+            
+            score = 0;
+            scoreTxt.text = $"Score: {score}";
+        }
+
+        if(collision.gameObject.CompareTag("2D Collectable"))
+        {
+            score++;
+            collision.gameObject.SetActive(false);
+            scoreTxt.text = $"Score: {score}";
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Vector2 boxOrigin = new Vector2(transform.position.x, transform.position.y - boxcastYoffset);
+        Vector2 boxSize = new Vector2(boxcastSizeX, boxcastSizeY);
+        Gizmos.DrawWireCube(boxOrigin, boxSize);
+    }
+
 }

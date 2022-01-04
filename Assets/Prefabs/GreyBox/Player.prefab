@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae80911bb22a63479472d936a3bec34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
 --- !u!114 &174793115402076694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +256,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 32db9610884b5de43912e3b6318955e4, type: 3}
   - {fileID: 8300000, guid: a38d669e745734842a686f5ecc0fba4e, type: 3}
   virtualCamera: {fileID: 174793116257709016}
+  gameCamera: {fileID: 0}
 --- !u!82 &174793115402076693
 AudioSource:
   m_ObjectHideFlags: 0

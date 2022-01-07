@@ -2806,6 +2806,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &1172466169 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2205780847502649888, guid: 8f573ebabca60ca46bc68c73dd8898b8, type: 3}
+  m_PrefabInstance: {fileID: 2205780847264368159}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e97978fb401ee94aad080788a371db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1235061244
 GameObject:
   m_ObjectHideFlags: 0
@@ -5852,6 +5863,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2897674565365386112, guid: d13d0aacc517a664f8998c6c382400aa, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1172466169}
     - target: {fileID: 2897674566337787970, guid: d13d0aacc517a664f8998c6c382400aa, type: 3}
       propertyPath: m_Name
       value: 2D Game
@@ -6200,6 +6215,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1121726493582663772, guid: 7dbf6251c9ec33d4081b278784fc6838, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1172466169}
     - target: {fileID: 1402019175800902639, guid: 7dbf6251c9ec33d4081b278784fc6838, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

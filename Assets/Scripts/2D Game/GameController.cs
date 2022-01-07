@@ -7,21 +7,33 @@ public class GameController : MonoBehaviour
 {
     #region Serialized Variables
 
+    [Header("Player Variables")]
     [SerializeField] GameObject GameEnvironment;
+    [SerializeField] GameObject playerStartPos;
+    [SerializeField] LayerMask gameEnvironmentLayer;
     [SerializeField] float speed = 5f;
     [SerializeField] float jumpForce = 5f;
-    [SerializeField] GameObject playerStartPos;
+
+    [Header("Collectables")]
     [SerializeField] TextMeshProUGUI scoreTxt;
-    [SerializeField] LayerMask gameEnvironmentLayer;
     [SerializeField] GameObject[] coins;
 
+    [Header("Sounds")]
+    [SerializeField] AudioManager audioManager;
+    [SerializeField] AudioClip stepClip;
+    [SerializeField] AudioClip jumpClip;
+    [SerializeField] AudioClip deathClip;
     #endregion
 
     #region Private Variables
 
     Rigidbody2D Rigidbody2D;
     BoxCollider2D BoxCollider2D;
+    AudioSource audioSource;
     int score = 0;
+
+    float currentStepTime = 0.0f;
+    float stepTime = 0.6f;
 
     const float boxcastYoffset = 0.09f;
     const float boxcastSizeX = 0.15f;
@@ -45,6 +57,12 @@ public class GameController : MonoBehaviour
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         BoxCollider2D = GetComponent<BoxCollider2D>();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        currentStepTime += 1 * Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -61,10 +79,22 @@ public class GameController : MonoBehaviour
         if(axis > Mathf.Epsilon)
         {
             GameEnvironment.transform.position += new Vector3((speed * Time.deltaTime), 0, 0);
+
+            if(currentStepTime >= stepTime)
+            {
+                currentStepTime = 0;
+                audioManager.PlayClipWithVariation(audioSource, stepClip);
+            }
         }
         else if(axis < -Mathf.Epsilon)
         {
             GameEnvironment.transform.position -= new Vector3((speed * Time.deltaTime), 0, 0);
+
+            if (currentStepTime >= stepTime)
+            {
+                currentStepTime = 0;
+                audioManager.PlayClipWithVariation(audioSource, stepClip);
+            }
         }
     }
 
@@ -81,6 +111,7 @@ public class GameController : MonoBehaviour
             if (Physics2D.BoxCast(boxOrigin, boxSize, 0f, Vector2.down, ~gameEnvironmentLayer))
             {
                 Rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+                audioManager.PlayClipWithVariation(audioSource, jumpClip);
             }
         }
         else if (axis < -Mathf.Epsilon)
@@ -110,6 +141,8 @@ public class GameController : MonoBehaviour
             
             score = 0;
             scoreTxt.text = $"Score: {score}";
+
+            audioManager.PlayClipWithVariation(audioSource, deathClip);
         }
 
         if(collision.gameObject.CompareTag("2D Collectable"))

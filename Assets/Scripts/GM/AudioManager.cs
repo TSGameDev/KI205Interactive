@@ -34,10 +34,9 @@ public class AudioManager : MonoBehaviour
         float randomVolume = Random.Range(randomVolumeMin, randomVolumeMax);
         float randomPitch = Random.Range(randomPitchMin, randomPitchMax);
 
-        source.clip = clip;
         source.pitch = randomPitch;
         source.volume = randomVolume;
-        source.Play();
+        source.PlayOneShot(clip);
     }
 
     /// <summary>

@@ -80,7 +80,7 @@ public class GameController : MonoBehaviour
         {
             GameEnvironment.transform.position += new Vector3((speed * Time.deltaTime), 0, 0);
 
-            if(currentStepTime >= stepTime)
+            if(currentStepTime >= stepTime && IsGrounded())
             {
                 currentStepTime = 0;
                 audioManager.PlayClipWithVariation(audioSource, stepClip);
@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour
         {
             GameEnvironment.transform.position -= new Vector3((speed * Time.deltaTime), 0, 0);
 
-            if (currentStepTime >= stepTime)
+            if (currentStepTime >= stepTime && IsGrounded())
             {
                 currentStepTime = 0;
                 audioManager.PlayClipWithVariation(audioSource, stepClip);
@@ -144,13 +144,6 @@ public class GameController : MonoBehaviour
             collision.gameObject.SetActive(false);
             scoreTxt.text = $"Score: {score}";
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Vector2 boxOrigin = new Vector2(transform.position.x, transform.position.y - boxcastYoffset);
-        Vector2 boxSize = new Vector2(boxcastSizeX, boxcastSizeY);
-        Gizmos.DrawWireCube(boxOrigin, boxSize);
     }
 
 }

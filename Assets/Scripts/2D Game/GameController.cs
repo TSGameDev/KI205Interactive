@@ -104,26 +104,19 @@ public class GameController : MonoBehaviour
     /// <param name="axis">The value of the vector2 that represents the WS button presses</param>
     public void playerFallorJump(float axis)
     {
-        if (axis > Mathf.Epsilon)
+        if (axis > Mathf.Epsilon && IsGrounded())
         {
-            Vector2 boxOrigin = new Vector2(transform.position.x, transform.position.y - boxcastYoffset);
-            Vector2 boxSize = new Vector2(boxcastSizeX, boxcastSizeY);
-            if (Physics2D.BoxCast(boxOrigin, boxSize, 0f, Vector2.down, ~gameEnvironmentLayer))
-            {
                 Rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
                 audioManager.PlayClipWithVariation(audioSource, jumpClip);
-            }
         }
-        else if (axis < -Mathf.Epsilon)
-        {
-            //turns of the colliders to allow the player to fall through terrain
-            BoxCollider2D.enabled = false;
-        }
-        else
-        {
-            //if there is no input, makes sure the collier is active
-            BoxCollider2D.enabled = true;
-        }
+    }
+
+    bool IsGrounded()
+    {
+        int layermask = 1 << 8;
+        RaycastHit2D raycastHit2d = Physics2D.BoxCast(BoxCollider2D.bounds.center, BoxCollider2D.bounds.size, 0f, Vector2.down, .1f, layermask);
+        Debug.Log(raycastHit2d.collider);
+        return raycastHit2d.collider != null;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

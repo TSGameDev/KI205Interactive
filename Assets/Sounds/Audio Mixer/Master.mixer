@@ -62,7 +62,15 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 70d66fb76287fd7419b18499f081548b
+    name: MasterVol
+  - guid: 1487b0b41e8e9fc42aa485bec811a8ef
+    name: MusicVol
+  - guid: 51203e9728e0b8b499e22fb97f145b3b
+    name: SoundVol
+  - guid: 46fe0d265c8578f41836f0ef705b285c
+    name: VoiceVol
   m_AudioMixerGroupViews:
   - guids:
     - a4f31a74d4bdf024897a5e9917a9a8ef
@@ -119,6 +127,7 @@ AudioMixerSnapshotController:
   m_SnapshotID: b1b357d08fe3dc94f9a49c2156436a67
   m_FloatValues:
     51203e9728e0b8b499e22fb97f145b3b: 0.2700072
+    70d66fb76287fd7419b18499f081548b: 0
   m_TransitionOverrides: {}
 --- !u!243 &25690518284699279
 AudioMixerGroupController:

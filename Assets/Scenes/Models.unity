@@ -1553,14 +1553,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 245081411}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fa30bf1cca32dc4a96e00fbf4f8ba9b, type: 3}
+  m_Script: {fileID: 11500000, guid: f10584b5e998a3d4c819bd260ea8a5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   masterAudio: {fileID: 245081410}
   musicAudio: {fileID: 245081409}
   soundsAudio: {fileID: 245081408}
   voiceAudio: {fileID: 245081407}
-  masterMix: {fileID: 0}
+  masterMix: {fileID: 24100000, guid: 612c9b4f7461d1741969b4147b046f95, type: 2}
 --- !u!1 &253948340
 GameObject:
   m_ObjectHideFlags: 0
@@ -9897,7 +9897,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7644068, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

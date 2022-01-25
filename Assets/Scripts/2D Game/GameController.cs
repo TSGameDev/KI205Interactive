@@ -8,7 +8,6 @@ public class GameController : MonoBehaviour
     #region Serialized Variables
 
     [Header("Player Variables")]
-    [SerializeField] GameObject GameEnvironment;
     [SerializeField] GameObject playerStartPos;
     [SerializeField] LayerMask gameEnvironmentLayer;
     [SerializeField] float speed = 5f;
@@ -26,7 +25,7 @@ public class GameController : MonoBehaviour
     #endregion
 
     #region Private Variables
-
+    GameObject GameEnvironment;
     Rigidbody2D Rigidbody2D;
     BoxCollider2D BoxCollider2D;
     AudioSource audioSource;
@@ -34,10 +33,6 @@ public class GameController : MonoBehaviour
 
     float currentStepTime = 0.0f;
     float stepTime = 0.6f;
-
-    const float boxcastYoffset = 0.09f;
-    const float boxcastSizeX = 0.15f;
-    const float boxcastSizeY = 0.02f;
     #endregion
 
     #region Get-Setters
@@ -58,6 +53,7 @@ public class GameController : MonoBehaviour
         Rigidbody2D = GetComponent<Rigidbody2D>();
         BoxCollider2D = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
+        GameEnvironment = gameObject;
     }
 
     private void Update()
@@ -78,7 +74,7 @@ public class GameController : MonoBehaviour
     {
         if(axis > Mathf.Epsilon)
         {
-            GameEnvironment.transform.position += new Vector3((speed * Time.deltaTime), 0, 0);
+            GameEnvironment.transform.position -= new Vector3((speed * Time.deltaTime), 0, 0);
 
             if(currentStepTime >= stepTime && IsGrounded())
             {
@@ -88,7 +84,7 @@ public class GameController : MonoBehaviour
         }
         else if(axis < -Mathf.Epsilon)
         {
-            GameEnvironment.transform.position -= new Vector3((speed * Time.deltaTime), 0, 0);
+            GameEnvironment.transform.position += new Vector3((speed * Time.deltaTime), 0, 0);
 
             if (currentStepTime >= stepTime && IsGrounded())
             {
@@ -115,7 +111,6 @@ public class GameController : MonoBehaviour
     {
         int layermask = 1 << 8;
         RaycastHit2D raycastHit2d = Physics2D.BoxCast(BoxCollider2D.bounds.center, BoxCollider2D.bounds.size, 0f, Vector2.down, .1f, layermask);
-        Debug.Log(raycastHit2d.collider);
         return raycastHit2d.collider != null;
     }
 
@@ -125,7 +120,6 @@ public class GameController : MonoBehaviour
         {
             //resets the character and environment position
             gameObject.transform.position = playerStartPos.transform.position;
-            GameEnvironment.transform.localPosition = new Vector3(0, 0, 0);
             
             foreach(GameObject coin in coins)
             {

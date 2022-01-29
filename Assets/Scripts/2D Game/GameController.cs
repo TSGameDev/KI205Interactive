@@ -8,7 +8,6 @@ public class GameController : MonoBehaviour
     #region Serialized Variables
 
     [Header("Player Variables")]
-    [SerializeField] GameObject GameEnvironment;
     [SerializeField] GameObject playerStartPos;
     [SerializeField] LayerMask gameEnvironmentLayer;
     [SerializeField] float speed = 5f;
@@ -26,7 +25,7 @@ public class GameController : MonoBehaviour
     #endregion
 
     #region Private Variables
-
+    GameObject GameEnvironment;
     Rigidbody2D Rigidbody2D;
     BoxCollider2D BoxCollider2D;
     AudioSource audioSource;
@@ -34,10 +33,6 @@ public class GameController : MonoBehaviour
 
     float currentStepTime = 0.0f;
     float stepTime = 0.6f;
-
-    const float boxcastYoffset = 0.09f;
-    const float boxcastSizeX = 0.15f;
-    const float boxcastSizeY = 0.02f;
     #endregion
 
     #region Get-Setters
@@ -58,6 +53,7 @@ public class GameController : MonoBehaviour
         Rigidbody2D = GetComponent<Rigidbody2D>();
         BoxCollider2D = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
+        GameEnvironment = gameObject;
     }
 
     private void Update()
@@ -78,9 +74,9 @@ public class GameController : MonoBehaviour
     {
         if(axis > Mathf.Epsilon)
         {
-            GameEnvironment.transform.position += new Vector3((speed * Time.deltaTime), 0, 0);
+            GameEnvironment.transform.position -= new Vector3((speed * Time.deltaTime), 0, 0);
 
-            if(currentStepTime >= stepTime)
+            if(currentStepTime >= stepTime && IsGrounded())
             {
                 currentStepTime = 0;
                 audioManager.PlayClipWithVariation(audioSource, stepClip);
@@ -88,9 +84,9 @@ public class GameController : MonoBehaviour
         }
         else if(axis < -Mathf.Epsilon)
         {
-            GameEnvironment.transform.position -= new Vector3((speed * Time.deltaTime), 0, 0);
+            GameEnvironment.transform.position += new Vector3((speed * Time.deltaTime), 0, 0);
 
-            if (currentStepTime >= stepTime)
+            if (currentStepTime >= stepTime && IsGrounded())
             {
                 currentStepTime = 0;
                 audioManager.PlayClipWithVariation(audioSource, stepClip);
@@ -104,26 +100,18 @@ public class GameController : MonoBehaviour
     /// <param name="axis">The value of the vector2 that represents the WS button presses</param>
     public void playerFallorJump(float axis)
     {
-        if (axis > Mathf.Epsilon)
+        if (axis > Mathf.Epsilon && IsGrounded())
         {
-            Vector2 boxOrigin = new Vector2(transform.position.x, transform.position.y - boxcastYoffset);
-            Vector2 boxSize = new Vector2(boxcastSizeX, boxcastSizeY);
-            if (Physics2D.BoxCast(boxOrigin, boxSize, 0f, Vector2.down, ~gameEnvironmentLayer))
-            {
                 Rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
                 audioManager.PlayClipWithVariation(audioSource, jumpClip);
-            }
         }
-        else if (axis < -Mathf.Epsilon)
-        {
-            //turns of the colliders to allow the player to fall through terrain
-            BoxCollider2D.enabled = false;
-        }
-        else
-        {
-            //if there is no input, makes sure the collier is active
-            BoxCollider2D.enabled = true;
-        }
+    }
+
+    bool IsGrounded()
+    {
+        int layermask = 1 << 8;
+        RaycastHit2D raycastHit2d = Physics2D.BoxCast(BoxCollider2D.bounds.center, BoxCollider2D.bounds.size, 0f, Vector2.down, .1f, layermask);
+        return raycastHit2d.collider != null;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -132,7 +120,6 @@ public class GameController : MonoBehaviour
         {
             //resets the character and environment position
             gameObject.transform.position = playerStartPos.transform.position;
-            GameEnvironment.transform.localPosition = new Vector3(0, 0, 0);
             
             foreach(GameObject coin in coins)
             {
@@ -151,13 +138,6 @@ public class GameController : MonoBehaviour
             collision.gameObject.SetActive(false);
             scoreTxt.text = $"Score: {score}";
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Vector2 boxOrigin = new Vector2(transform.position.x, transform.position.y - boxcastYoffset);
-        Vector2 boxSize = new Vector2(boxcastSizeX, boxcastSizeY);
-        Gizmos.DrawWireCube(boxOrigin, boxSize);
     }
 
 }
